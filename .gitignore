@@ -3,6 +3,7 @@
 CMakeLists.txt
 s21_main
 s21_test
+valgrind.txt
 
 # Prerequisites
 *.d

@@ -1,5 +1,7 @@
-#ifndef __S21_MATRIX_OOP_H__  // TODO: CHECK CORRECT
-#define __S21_MATRIX_OOP_H__
+#ifndef S21_MATRIX_OOP_H_  // TODO: CHECK CORRECT
+#define S21_MATRIX_OOP_H_
+
+enum DefaultDimensionsValues { DEFAULT_ROWS = 3, DEFAULT_COLS = 3 };
 
 namespace S21Matrix {
 
@@ -42,7 +44,12 @@ class S21Matrix {
   S21Matrix operator*=(const S21Matrix& other);
   double& operator()(int i, int j);
   const double& operator()(int i, int j) const;
+
+ public:
+  // helpers
+  void S21Allocate();
+  void S21Print();
 };
 }  // namespace S21Matrix
 
-#endif  // __S21_MATRIX_OOP_H__
+#endif  // S21_MATRIX_OOP_H_

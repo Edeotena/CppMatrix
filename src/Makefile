@@ -10,8 +10,8 @@ LIB = s21_matrix_oop.a
 TEST_TARGET  = s21_test
 EXECUTABLE = s21_main
 
-SRC_FILES = lib/*.cpp
-TEST_FILES = tests/*.cpp
+SRC_FILES = lib/*.cc -I .
+TEST_FILES = tests/*.cc
 
 all: test clean $(LIB)
 
@@ -28,7 +28,7 @@ test: build_test
 	./$(TEST_TARGET)
 
 build: style
-	$(CC) $(FLAGS) $(SRC_FILES) main.cpp -o $(EXECUTABLE)
+	$(CC) $(FLAGS) $(SRC_FILES) main.cc -o $(EXECUTABLE)
 
 run: build
 	./$(EXECUTABLE)
@@ -45,11 +45,15 @@ cppcheck:
 
 style:
 	cp ../materials/linters/.clang-format .
-	clang-format -i *.[ch] || true
-	clang-format -i */*.[ch] || true
+	clang-format -i $(wildcard */*.cc *.cc */*.h *.h);
 	rm -f .clang-format
 
-valgrind: style build_test
+valgrind: style build
+	valgrind $(VALGRIND_FLAGS) ./$(EXECUTABLE)
+	grep --color=always -n "ERROR SUMMARY" $(VALGRIND_OUTPUT) | grep -v "0 errors from 0 contexts" || true
+	grep --color=always -n "definitely lost:" $(VALGRIND_OUTPUT) | grep -v "0 bytes in 0 blocks" || true
+
+valgrind_tests: style build_test
 	valgrind $(VALGRIND_FLAGS) ./$(TEST_TARGET)
 	grep --color=always -n "ERROR SUMMARY" $(VALGRIND_OUTPUT) | grep -v "0 errors from 0 contexts" || true
 	grep --color=always -n "definitely lost:" $(VALGRIND_OUTPUT) | grep -v "0 bytes in 0 blocks" || true
