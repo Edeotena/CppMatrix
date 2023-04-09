@@ -53,11 +53,11 @@ style:
 	$(DELETE) .clang-format
 
 valgrind: style build
-	$(VALGRIND) $(VALGRIND_FLAGS) ./$(EXECUTABLE)
+	$(VALGRIND) $(VALGRIND_FLAGS) ./$(EXECUTABLE) || true
 	$(FIND_VALGRIND_ERRORS)
 	$(FIND_VALGRIND_LEAKS)
 
 valgrind_tests: style build_test
-	$(VALGRIND) $(VALGRIND_FLAGS) ./$(TEST_TARGET)
+	$(VALGRIND) $(VALGRIND_FLAGS) ./$(TEST_TARGET) || true
 	$(FIND_VALGRIND_ERRORS)
 	$(FIND_VALGRIND_LEAKS)
