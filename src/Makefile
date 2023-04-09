@@ -25,7 +25,6 @@ build_test: style
 $(LIB): style
 	$(CC) $(FLAGS) -c $(SRC_FILES)
 	ar rcv $(LIB) *.o
-	ranlib $(LIB)
 	rm *.o
 
 test: build_test
@@ -43,6 +42,7 @@ clean:
 	$(DELETE) *.o
 	$(DELETE) $(VALGRIND_OUTPUT)
 	$(DELETE) .clang-format
+	$(DELETE) *.dSYM
 
 cppcheck:
 	cppcheck --enable=all --suppress=missingIncludeSystem .

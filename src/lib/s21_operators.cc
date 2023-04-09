@@ -28,6 +28,22 @@ S21Matrix& S21Matrix::operator=(const S21Matrix& other) {
   return *this;
 }
 
+S21Matrix& S21Matrix::operator=(S21Matrix&& other) noexcept {
+  if (other == *this) {
+    return *this;
+  }
+
+  delete[] matrix_;
+  cols_ = other.cols_;
+  rows_ = other.rows_;
+  matrix_ = other.matrix_;
+
+  other.matrix_ = nullptr;
+  other.cols_ = other.rows_ = 0;
+
+  return *this;
+}
+
 bool S21Matrix::operator==(const S21Matrix& other) const {
   if (rows_ != other.rows_ || cols_ != other.cols_) {
     return false;

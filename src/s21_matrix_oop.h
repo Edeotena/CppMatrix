@@ -25,6 +25,7 @@ class S21Matrix {
 
   // Matrix operators
   S21Matrix& operator=(const S21Matrix& other);
+  S21Matrix& operator=(S21Matrix&& other) noexcept;
   bool operator==(const S21Matrix& other) const;
   bool operator!=(const S21Matrix& other) const;
   S21Matrix operator+(const S21Matrix& other) const;
@@ -50,10 +51,10 @@ class S21Matrix {
   void SetRows(const int rows);
   void SetCols(const int cols);
 
-private:
-    // Attributes
-    int rows_, cols_;
-    double* matrix_;
+ private:
+  // Attributes
+  int rows_, cols_;
+  double* matrix_;
 };
 
 constexpr double equality_epsilon = 1e-07;
