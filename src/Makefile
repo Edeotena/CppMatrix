@@ -6,20 +6,21 @@ VALGRIND = valgrind
 
 FLAGS = -std=c++17 -Wall -Werror -Wextra -pedantic -g
 VALGRIND_FLAGS = --log-file="$(VALGRIND_OUTPUT)" --track-origins=yes --trace-children=yes --leak-check=full --leak-resolution=med
+TEST_FLAGS =  -lgtest
 
 VALGRIND_OUTPUT = valgrind.txt
 LIB = s21_matrix_oop.a
 
-TEST_TARGET  = s21_test
+TEST_TARGET  = s21_tests
 EXECUTABLE = s21_main
 
 SRC_FILES = lib/*.cc -I .
-TEST_FILES = tests/*.cc
+TEST_FILES = s21_tests.cc
 
-all: test clean $(LIB)
+all: tests clean $(LIB)
 
 build_test: style
-	$(CC) $(FLAGS) $(SRC_FILES) $(TEST_FILES) -o $(TEST_TARGET)
+	$(CC) $(FLAGS) $(SRC_FILES) $(TEST_FILES) -o $(TEST_TARGET) $(TEST_FLAGS)
 
 $(LIB): style
 	$(CC) $(FLAGS) -c $(SRC_FILES)
@@ -27,7 +28,7 @@ $(LIB): style
 	ranlib $(LIB)
 	rm *.o
 
-test: build_test
+tests: build_test
 	./$(TEST_TARGET)
 
 build: style

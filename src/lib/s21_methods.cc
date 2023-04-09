@@ -28,7 +28,18 @@ S21Matrix::S21Matrix(const S21Matrix& other)
 
 S21Matrix::S21Matrix(S21Matrix&& other) noexcept
     : rows_(0), cols_(0), matrix_(nullptr) {
-  *this = other;
+  if (this == &other) {
+    return;
+  }
+
+  delete[] matrix_;
+
+  cols_ = other.cols_;
+  rows_ = other.rows_;
+  matrix_ = other.matrix_;
+
+  other.cols_ = other.rows_ = 0;
+  other.matrix_ = nullptr;
 }
 
 }  // namespace S21Matrix

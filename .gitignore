@@ -2,7 +2,7 @@
 /cmake-build-debug/
 CMakeLists.txt
 s21_main
-s21_test
+s21_tests
 valgrind.txt
 
 # Prerequisites

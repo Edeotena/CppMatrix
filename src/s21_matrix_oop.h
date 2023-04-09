@@ -12,7 +12,7 @@ class S21Matrix {
   double* matrix_;
 
  public:
-  // Constructors and destructors
+  // Constructors and destructors (methods)
   S21Matrix(int rows, int cols);
   S21Matrix();
   S21Matrix(const S21Matrix& other);
@@ -20,18 +20,18 @@ class S21Matrix {
   ~S21Matrix();
 
   // Matrix operations
-  bool EqMatrix(const S21Matrix& other);
+  bool EqMatrix(const S21Matrix& other) const;
   void SumMatrix(const S21Matrix& other);
   void SubMatrix(const S21Matrix& other);
   void MulNumber(const double num);
   void MulMatrix(const S21Matrix& other);
-  S21Matrix Transpose();
-  S21Matrix CalcComplements();
-  double Determinant();
-  S21Matrix InverseMatrix();
+  S21Matrix Transpose() const;
+  S21Matrix CalcComplements() const;
+  double Determinant() const;
+  S21Matrix InverseMatrix() const;
 
+  // Matrix operators
   S21Matrix& operator=(const S21Matrix& other);
-  S21Matrix& operator=(S21Matrix&& other) noexcept;
   bool operator==(const S21Matrix& other) const;
   bool operator!=(const S21Matrix& other) const;
   S21Matrix operator+(const S21Matrix& other) const;
@@ -56,6 +56,8 @@ class S21Matrix {
   void S21SetRows(const int rows);
   void S21SetCols(const int cols);
 };
+
+constexpr double equality_epsilon = 1e-07;
 }  // namespace S21Matrix
 
 #endif  // S21_MATRIX_OOP_H_

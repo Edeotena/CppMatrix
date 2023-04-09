@@ -28,31 +28,16 @@ S21Matrix& S21Matrix::operator=(const S21Matrix& other) {
   return *this;
 }
 
-S21Matrix& S21Matrix::operator=(S21Matrix&& other) noexcept {
-  if (this == &other) {
-    return *this;
-  }
-
-  delete[] matrix_;
-
-  cols_ = other.cols_;
-  rows_ = other.rows_;
-  matrix_ = other.matrix_;
-
-  other.cols_ = other.rows_ = 0;
-  other.matrix_ = nullptr;
-
-  return *this;
-}
-
 bool S21Matrix::operator==(const S21Matrix& other) const {
   if (rows_ != other.rows_ || cols_ != other.cols_) {
     return false;
   }
 
-  if (!std::equal(matrix_, matrix_ + cols_ * rows_, other.matrix_,
-                  other.matrix_ + other.cols_ * other.rows_)) {
-    return false;
+  long size = rows_ * cols_;
+  for (int i = 0; i < size; ++i) {
+    if (std::abs(matrix_[i] - other.matrix_[i]) > equality_epsilon) {
+      return false;
+    }
   }
 
   return true;
