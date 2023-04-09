@@ -443,13 +443,46 @@ TEST(S21Matrix, 24_const_wrong_index) {
   }
 }
 
-TEST(S21Matrix, 25_default_wrong_index) {
-  S21Matrix a(2, 2);
-  try {
-    a(10, 0);
-  } catch (const std::out_of_range &e) {
-    ASSERT_EQ(true, true);
-  }
+TEST(S21Matrix, 25_inverse) {
+  S21Matrix test_matrix_1(4, 4);
+  S21Matrix test_matrix_2(4, 4);
+  test_matrix_1(0, 0) = -1.0;
+  test_matrix_1(0, 1) = 2.0;
+  test_matrix_1(0, 2) = 7.0;
+  test_matrix_1(0, 3) = 9.0;
+  test_matrix_1(1, 0) = 1.0;
+  test_matrix_1(1, 1) = 0.0;
+  test_matrix_1(1, 2) = 0.0;
+  test_matrix_1(1, 3) = 0.0;
+  test_matrix_1(2, 0) = 47.0;
+  test_matrix_1(2, 1) = 13.0;
+  test_matrix_1(2, 2) = 17.0;
+  test_matrix_1(2, 3) = 21.0;
+  test_matrix_1(3, 0) = 22.0;
+  test_matrix_1(3, 1) = 7.0;
+  test_matrix_1(3, 2) = 1.0;
+  test_matrix_1(3, 3) = 3.0;
+
+  test_matrix_2(0, 0) = 0.0;
+  test_matrix_2(0, 1) = 1.0;
+  test_matrix_2(0, 2) = 0.0;
+  test_matrix_2(0, 3) = 0.0;
+  test_matrix_2(1, 0) = -5.0 / 23.0;
+  test_matrix_2(1, 1) = -121.0 / 23.0;
+  test_matrix_2(1, 2) = 2.0 / 23.0;
+  test_matrix_2(1, 3) = 1.0 / 23.0;
+  test_matrix_2(2, 0) = -18.0 / 23.0;
+  test_matrix_2(2, 1) = -379.0 / 46.0;
+  test_matrix_2(2, 2) = 19.0 / 46.0;
+  test_matrix_2(2, 3) = -25.0 / 46.0;
+  test_matrix_2(3, 0) = 53.0 / 69.0;
+  test_matrix_2(3, 1) = 1061.0 / 138.0;
+  test_matrix_2(3, 2) = -47.0 / 138.0;
+  test_matrix_2(3, 3) = 19.0 / 46.0;
+
+  S21Matrix test_matrix_3 = test_matrix_1.InverseMatrix();
+  bool res = test_matrix_3 == test_matrix_2;
+  ASSERT_EQ(res, true);
 }
 
 }  // namespace S21Matrix
