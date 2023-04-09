@@ -45,10 +45,17 @@ class S21Matrix {
   double& operator()(int i, int j);
   const double& operator()(int i, int j) const;
 
- public:
-  // helpers
+ private:
+  // Helpers
   void S21Allocate();
-  void S21Print();
+
+ public:
+  // Additional functions
+  void S21Print() const;
+  int S21GetRows() const;
+  int S21GetCols() const;
+  void S21SetRows(const int rows);
+  void S21SetCols(const int cols);
 };
 }  // namespace S21Matrix
 
