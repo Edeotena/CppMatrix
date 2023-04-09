@@ -47,6 +47,7 @@ class S21Matrix {
  private:
   // Helpers
   void S21Allocate();
+  S21Matrix S21LessMatrix(int row_to_skip, int col_to_skip) const;
 
  public:
   // Additional functions

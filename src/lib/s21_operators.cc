@@ -52,39 +52,39 @@ S21Matrix S21Matrix::operator+(const S21Matrix& other) const {
     throw std::out_of_range("Matrix's dimensions must be equal");
   }
 
-  S21Matrix result(*this);
+  S21Matrix res(*this);
 
   long size = cols_ * rows_;
   for (int i = 0; i < size; ++i) {
-    result.matrix_[i] = matrix_[i] + other.matrix_[i];
+    res.matrix_[i] = matrix_[i] + other.matrix_[i];
   }
 
-  return result;
+  return res;
 }
 S21Matrix S21Matrix::operator-(const S21Matrix& other) const {
   if (rows_ != other.rows_ || cols_ != other.cols_) {
     throw std::out_of_range("Matrix's dimensions must be equal");
   }
 
-  S21Matrix result(*this);
+  S21Matrix res(*this);
 
   long size = cols_ * rows_;
   for (int i = 0; i < size; ++i) {
-    result.matrix_[i] = matrix_[i] - other.matrix_[i];
+    res.matrix_[i] = matrix_[i] - other.matrix_[i];
   }
 
-  return result;
+  return res;
 }
 
 S21Matrix S21Matrix::operator*(const double other) const {
-  S21Matrix result(*this);
+  S21Matrix res(*this);
 
   long size = cols_ * rows_;
   for (int i = 0; i < size; ++i) {
-    result.matrix_[i] = matrix_[i] * other;
+    res.matrix_[i] = matrix_[i] * other;
   }
 
-  return result;
+  return res;
 }
 S21Matrix S21Matrix::operator*(const S21Matrix& other) const {
   if (cols_ != other.rows_) {
@@ -93,19 +93,19 @@ S21Matrix S21Matrix::operator*(const S21Matrix& other) const {
         "of rows of the second matrix");
   }
 
-  S21Matrix result(rows_, other.cols_);
+  S21Matrix res(rows_, other.cols_);
 
-  for (int i = 0; i < result.rows_; ++i) {
-    for (int j = 0; j < result.cols_; ++j) {
+  for (int i = 0; i < res.rows_; ++i) {
+    for (int j = 0; j < res.cols_; ++j) {
       double val = 0;
       for (int k = 0; k < cols_; ++k) {
         val += (*this)(i, k) * other(k, j);
       }
-      result(i, j) = val;
+      res(i, j) = val;
     }
   }
 
-  return result;
+  return res;
 }
 
 S21Matrix S21Matrix::operator+=(const S21Matrix& other) {

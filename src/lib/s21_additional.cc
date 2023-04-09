@@ -1,23 +1,8 @@
 #include <iostream>
-#include <stdexcept>
 
 #include "s21_matrix_oop.h"
 
 namespace S21Matrix {
-void S21Matrix::S21Allocate() {
-  if (rows_ < 0 || cols_ < 0) {
-    rows_ = cols_ = 0;
-    throw std::out_of_range("Dimensions must be >= 1");
-  }
-
-  try {
-    matrix_ = new double[rows_ * cols_];
-  } catch (const std::bad_alloc& exc) {
-    rows_ = cols_ = 0;
-    throw std::out_of_range("Allocation error");
-  }
-}
-
 void S21Matrix::S21Print() const {
   std::cout << "Matrix(" << rows_ << ", " << cols_ << "):\n";
   for (int i = 0; i < rows_; i++) {

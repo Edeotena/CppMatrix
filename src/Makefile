@@ -17,7 +17,7 @@ EXECUTABLE = s21_main
 SRC_FILES = lib/*.cc -I .
 TEST_FILES = s21_tests.cc
 
-all: tests clean $(LIB)
+all: test clean $(LIB)
 
 build_test: style
 	$(CC) $(FLAGS) $(SRC_FILES) $(TEST_FILES) -o $(TEST_TARGET) $(TEST_FLAGS)
@@ -28,7 +28,7 @@ $(LIB): style
 	ranlib $(LIB)
 	rm *.o
 
-tests: build_test
+test: build_test
 	./$(TEST_TARGET)
 
 build: style
