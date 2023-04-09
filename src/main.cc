@@ -10,16 +10,11 @@ int main() {
   S21Matrix::S21Matrix o(std::move(a));
   o.S21Print();
   a.S21Print();
-  //  try {
-  //    S21Matrix::S21Matrix k(-1, -1);
-  //  } catch (const std::out_of_range& ex) {
-  //    std::cout << ex.what();
-  //  }
-  try {
-    a.S21SetRows(1);
-    a.S21SetCols(1);
-    a.S21Print();
-  } catch (const std::out_of_range& ex) {
-    std::cout << ex.what();
-  }
+  // S21Matrix::S21Matrix k(-1, -1);
+  a.S21SetRows(1);
+  a.S21SetCols(1);
+  a.S21Print();
+  a = a;
+  a(0, 0) = 1.1;
+  a.S21Print();
 }
