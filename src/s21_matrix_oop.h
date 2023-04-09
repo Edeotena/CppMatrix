@@ -1,16 +1,9 @@
-#ifndef S21_MATRIX_OOP_H_  // TODO: CHECK CORRECT
-#define S21_MATRIX_OOP_H_
-
-enum DefaultDimensionsValues { kDefaultRows = 3, kDefaultCols = 5 };
+#ifndef SRC_S21_MATRIX_OOP_H_
+#define SRC_S21_MATRIX_OOP_H_
 
 namespace S21Matrix {
 
 class S21Matrix {
- private:
-  // Attributes
-  int rows_, cols_;
-  double* matrix_;
-
  public:
   // Constructors and destructors (methods)
   S21Matrix(int rows, int cols);
@@ -56,9 +49,15 @@ class S21Matrix {
   int GetCols() const;
   void SetRows(const int rows);
   void SetCols(const int cols);
+
+private:
+    // Attributes
+    int rows_, cols_;
+    double* matrix_;
 };
 
 constexpr double equality_epsilon = 1e-07;
+enum DefaultDimensionsValues { kDefaultRows = 3, kDefaultCols = 5 };
 }  // namespace S21Matrix
 
-#endif  // S21_MATRIX_OOP_H_
+#endif  // SRC_S21_MATRIX_OOP_H_
