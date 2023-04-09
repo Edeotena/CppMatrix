@@ -30,7 +30,24 @@ S21Matrix S21Matrix::CalcComplements() const {
   return res;
 }
 
-double S21Matrix::Determinant() const { return 0; }
+double S21Matrix::Determinant() const {
+  S21Matrix cp(*this);
+  for (int k = 0; k < cp.cols_ - 1; k++) {
+    for (int i = k + 1; i < cp.cols_; i++) {
+      double tmp = -cp(i, k) / cp(k, k);
+      for (int j = 0; j < cp.cols_; j++) {
+        cp(i, j) += cp(k, j) * tmp;
+      }
+    }
+  }
+
+  double d = 1;
+  for (int i = 0; i < cp.cols_; i++) {
+    d *= cp(i, i);
+  }
+
+  return d;
+}
 
 S21Matrix S21Matrix::InverseMatrix() const {
   S21Matrix res;

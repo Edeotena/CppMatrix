@@ -269,7 +269,7 @@ TEST(S21Matrix, 12_determ) {
   test_matrix_1(2, 2) = 9.0;
 
   double res = test_matrix_1.Determinant();
-  ASSERT_EQ(res, 0.0);
+  ASSERT_LE(abs(res - (0)), equality_epsilon);
 }
 
 TEST(S21Matrix, 12_determ_wrong_size) {
@@ -291,7 +291,7 @@ TEST(S21Matrix, 14_determ) {
   test_matrix_1(1, 0) = 21.0;
   test_matrix_1(1, 1) = 5.0;
   double res = test_matrix_1.Determinant();
-  ASSERT_EQ(res, 89.0);
+  ASSERT_LE(abs(res - (89)), equality_epsilon);
 }
 
 TEST(S21Matrix, 15_determ) {
@@ -315,10 +315,10 @@ TEST(S21Matrix, 15_determ) {
   test_matrix_1(3, 3) = 6.0;
 
   double res = test_matrix_1.Determinant();
-  ASSERT_EQ(res, -191.0);
+  ASSERT_LE(abs(res - (-191)), equality_epsilon);
 }
 
-TEST(S21Matrix, 16_determ) {
+TEST(S21Matrix, 16_inverse) {
   S21Matrix test_matrix_1(3, 3);
   S21Matrix test_matrix_2(3, 3);
   test_matrix_1(0, 0) = 2.0;
