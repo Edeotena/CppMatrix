@@ -1,8 +1,11 @@
 CC = g++
+DELETE = rm -rf
+FIND_VALGRIND_ERRORS = grep --color=always -n "ERROR SUMMARY" $(VALGRIND_OUTPUT) | grep -v "0 errors from 0 contexts" || true
+FIND_VALGRIND_LEAKS = grep --color=always -n "definitely lost:" $(VALGRIND_OUTPUT) | grep -v "0 bytes in 0 blocks" || true
+VALGRIND = valgrind
+
 FLAGS = -std=c++17 -Wall -Werror -Wextra -pedantic -g
 VALGRIND_FLAGS = --log-file="$(VALGRIND_OUTPUT)" --track-origins=yes --trace-children=yes --leak-check=full --leak-resolution=med
-
-DELETE = rm -rf
 
 VALGRIND_OUTPUT = valgrind.txt
 LIB = s21_matrix_oop.a
@@ -46,14 +49,14 @@ cppcheck:
 style:
 	cp ../materials/linters/.clang-format .
 	clang-format -i $(wildcard */*.cc *.cc */*.h *.h);
-	rm -f .clang-format
+	$(DELETE) .clang-format
 
 valgrind: style build
-	valgrind $(VALGRIND_FLAGS) ./$(EXECUTABLE)
-	grep --color=always -n "ERROR SUMMARY" $(VALGRIND_OUTPUT) | grep -v "0 errors from 0 contexts" || true
-	grep --color=always -n "definitely lost:" $(VALGRIND_OUTPUT) | grep -v "0 bytes in 0 blocks" || true
+	$(VALGRIND) $(VALGRIND_FLAGS) ./$(EXECUTABLE)
+	$(FIND_VALGRIND_ERRORS)
+	$(FIND_VALGRIND_LEAKS)
 
 valgrind_tests: style build_test
-	valgrind $(VALGRIND_FLAGS) ./$(TEST_TARGET)
-	grep --color=always -n "ERROR SUMMARY" $(VALGRIND_OUTPUT) | grep -v "0 errors from 0 contexts" || true
-	grep --color=always -n "definitely lost:" $(VALGRIND_OUTPUT) | grep -v "0 bytes in 0 blocks" || true
+	$(VALGRIND) $(VALGRIND_FLAGS) ./$(TEST_TARGET)
+	$(FIND_VALGRIND_ERRORS)
+	$(FIND_VALGRIND_LEAKS)

@@ -24,7 +24,7 @@ S21Matrix::S21Matrix(int rows, int cols) : rows_(rows), cols_(cols) {
   std::fill(matrix_, matrix_ + rows_ * cols_, 0);
 }
 
-S21Matrix::S21Matrix() try : S21Matrix(DEFAULT_ROWS, DEFAULT_COLS) {
+S21Matrix::S21Matrix() try : S21Matrix(kDefaultRows, kDefaultCols) {
 } catch (const std::out_of_range& exp) {
   throw;
 }

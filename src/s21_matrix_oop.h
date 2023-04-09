@@ -1,7 +1,7 @@
 #ifndef S21_MATRIX_OOP_H_  // TODO: CHECK CORRECT
 #define S21_MATRIX_OOP_H_
 
-enum DefaultDimensionsValues { DEFAULT_ROWS = 3, DEFAULT_COLS = 3 };
+enum DefaultDimensionsValues { kDefaultRows = 3, kDefaultCols = 5 };
 
 namespace S21Matrix {
 
