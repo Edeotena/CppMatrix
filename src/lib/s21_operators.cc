@@ -21,7 +21,7 @@ S21Matrix& S21Matrix::operator=(const S21Matrix& other) {
 
   cols_ = other.cols_;
   rows_ = other.rows_;
-  S21Allocate();
+  AllocateMatrix();
 
   std::copy(other.matrix_, other.matrix_ + other.rows_ * other.cols_, matrix_);
 

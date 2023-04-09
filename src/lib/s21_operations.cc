@@ -32,7 +32,7 @@ S21Matrix S21Matrix::CalcComplements() const {
 
   for (int i = 0; i < res.rows_; ++i) {
     for (int j = 0; j < res.cols_; ++j) {
-      S21Matrix small_matrix = (*this).S21LessMatrix(i, j);
+      S21Matrix small_matrix = (*this).LessMatrix(i, j);
 
       res(i, j) = small_matrix.Determinant() * ((i + j) % 2 == 0 ? 1 : -1);
     }

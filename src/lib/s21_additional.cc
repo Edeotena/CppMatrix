@@ -3,7 +3,7 @@
 #include "s21_matrix_oop.h"
 
 namespace S21Matrix {
-void S21Matrix::S21Print() const {
+void S21Matrix::PrintMatrix() const {
   std::cout << "Matrix(" << rows_ << ", " << cols_ << "):\n";
   for (int i = 0; i < rows_; i++) {
     for (int j = 0; j < cols_; j++) {
@@ -13,11 +13,11 @@ void S21Matrix::S21Print() const {
   std::cout << '\n';
 }
 
-int S21Matrix::S21GetRows() const { return rows_; }
+int S21Matrix::GetRows() const { return rows_; }
 
-int S21Matrix::S21GetCols() const { return cols_; }
+int S21Matrix::GetCols() const { return cols_; }
 
-void S21Matrix::S21SetRows(const int rows) {
+void S21Matrix::SetRows(const int rows) {
   S21Matrix res(rows, cols_);
 
   for (int i = 0; i < cols_; ++i) {
@@ -29,7 +29,7 @@ void S21Matrix::S21SetRows(const int rows) {
   *this = res;
 }
 
-void S21Matrix::S21SetCols(const int cols) {
+void S21Matrix::SetCols(const int cols) {
   S21Matrix res(rows_, cols);
 
   for (int i = 0; i < rows_; ++i) {

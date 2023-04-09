@@ -14,7 +14,7 @@ S21Matrix::~S21Matrix() {
 
 S21Matrix::S21Matrix(int rows, int cols)
     : rows_(rows), cols_(cols), matrix_(nullptr) {
-  S21Allocate();
+  AllocateMatrix();
 
   std::fill(matrix_, matrix_ + rows_ * cols_, 0);
 }

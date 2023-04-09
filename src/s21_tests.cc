@@ -5,8 +5,8 @@
 namespace S21Matrix {
 TEST(S21Matrix, 1_init) {
   S21Matrix a;
-  ASSERT_EQ(a.S21GetRows(), kDefaultRows);
-  ASSERT_EQ(a.S21GetCols(), kDefaultCols);
+  ASSERT_EQ(a.GetRows(), kDefaultRows);
+  ASSERT_EQ(a.GetCols(), kDefaultCols);
 }
 
 TEST(S21Matrix, 1_init_with_wrong_size) {
@@ -350,8 +350,8 @@ TEST(S21Matrix, 17_move) {
   S21Matrix a(4, 4);
   S21Matrix b(std::move(a));
 
-  ASSERT_EQ(a.S21GetCols(), 0);
-  ASSERT_EQ(b.S21GetCols(), 4);
+  ASSERT_EQ(a.GetCols(), 0);
+  ASSERT_EQ(b.GetCols(), 4);
 }
 
 TEST(S21Matrix, 18_plus) {
@@ -369,11 +369,11 @@ TEST(S21Matrix, 19_sets_big) {
   a(0, 1) = 2;
   a(1, 0) = 3;
   a(1, 1) = 4;
-  a.S21SetCols(3);
-  a.S21SetRows(4);
+  a.SetCols(3);
+  a.SetRows(4);
 
-  ASSERT_EQ(a.S21GetCols(), 3);
-  ASSERT_EQ(a.S21GetRows(), 4);
+  ASSERT_EQ(a.GetCols(), 3);
+  ASSERT_EQ(a.GetRows(), 4);
 }
 
 TEST(S21Matrix, 19_sets_small) {
@@ -389,11 +389,11 @@ TEST(S21Matrix, 19_sets_small) {
   a(2, 1) = 5.75;
   a(2, 2) = 0.1;
 
-  a.S21SetCols(2);
-  a.S21SetRows(2);
+  a.SetCols(2);
+  a.SetRows(2);
 
-  ASSERT_EQ(a.S21GetCols(), 2);
-  ASSERT_EQ(a.S21GetRows(), 2);
+  ASSERT_EQ(a.GetCols(), 2);
+  ASSERT_EQ(a.GetRows(), 2);
 }
 
 TEST(S21Matrix, 20_equal) {

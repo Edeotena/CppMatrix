@@ -46,16 +46,16 @@ class S21Matrix {
 
  private:
   // Helpers
-  void S21Allocate();
-  S21Matrix S21LessMatrix(int row_to_skip, int col_to_skip) const;
+  void AllocateMatrix();
+  S21Matrix LessMatrix(int row_to_skip, int col_to_skip) const;
 
  public:
   // Additional functions
-  void S21Print() const;
-  int S21GetRows() const;
-  int S21GetCols() const;
-  void S21SetRows(const int rows);
-  void S21SetCols(const int cols);
+  void PrintMatrix() const;
+  int GetRows() const;
+  int GetCols() const;
+  void SetRows(const int rows);
+  void SetCols(const int cols);
 };
 
 constexpr double equality_epsilon = 1e-07;

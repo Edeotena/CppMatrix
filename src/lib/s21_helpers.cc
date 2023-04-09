@@ -4,10 +4,10 @@
 #include "s21_matrix_oop.h"
 
 namespace S21Matrix {
-void S21Matrix::S21Allocate() {
+void S21Matrix::AllocateMatrix() {
   if (rows_ < 0 || cols_ < 0) {
     rows_ = cols_ = 0;
-    throw std::out_of_range("Dimensions must be >= 1");
+    throw std::out_of_range("Dimensions must be >= 0");
   }
 
   try {
@@ -18,9 +18,8 @@ void S21Matrix::S21Allocate() {
   }
 }
 
-S21Matrix S21Matrix::S21LessMatrix(int row_to_skip, int col_to_skip) const {
-  if (row_to_skip < 0 || col_to_skip < 0 || row_to_skip >= rows_ ||
-      col_to_skip >= cols_) {
+S21Matrix S21Matrix::LessMatrix(int row_to_skip, int col_to_skip) const {
+  if (row_to_skip >= rows_ || col_to_skip >= cols_) {
     throw std::out_of_range("Wrong dimensions for less matrix");
   }
 
