@@ -6,7 +6,7 @@
 namespace S21Matrix {
 
 double& S21Matrix::operator()(int i, int j) const {
-  if (i >= rows_ || j >= cols_) {
+  if (i >= rows_ || j >= cols_ || i < 0 || j < 0) {
     throw std::out_of_range("Incorrect input, index is out of range");
   }
   return matrix_[i * cols_ + j];
@@ -34,12 +34,9 @@ S21Matrix& S21Matrix::operator=(S21Matrix&& other) noexcept {
   }
 
   delete[] matrix_;
-  cols_ = other.cols_;
-  rows_ = other.rows_;
-  matrix_ = other.matrix_;
-
-  other.matrix_ = nullptr;
-  other.cols_ = other.rows_ = 0;
+  cols_ = std::exchange(other.cols_, 0);
+  rows_ = std::exchange(other.rows_, 0);
+  matrix_ = std::exchange(other.matrix_, nullptr);
 
   return *this;
 }

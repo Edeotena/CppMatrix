@@ -12,8 +12,10 @@ void S21Matrix::AllocateMatrix() {
 
   try {
     matrix_ = new double[rows_ * cols_];
+    std::fill(matrix_, matrix_ + rows_ * cols_, 0);
   } catch (const std::bad_alloc& exc) {
     rows_ = cols_ = 0;
+    matrix_ = nullptr;
     throw std::out_of_range("Allocation error");
   }
 }

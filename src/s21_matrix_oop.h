@@ -58,7 +58,6 @@ class S21Matrix {
 };
 
 constexpr double equality_epsilon = 1e-07;
-enum DefaultDimensionsValues { kDefaultRows = 3, kDefaultCols = 5 };
 }  // namespace S21Matrix
 
 #endif  // SRC_S21_MATRIX_OOP_H_

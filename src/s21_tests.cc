@@ -5,8 +5,8 @@
 namespace S21Matrix {
 TEST(S21Matrix, 1_init) {
   S21Matrix a;
-  ASSERT_EQ(a.GetRows(), kDefaultRows);
-  ASSERT_EQ(a.GetCols(), kDefaultCols);
+  ASSERT_EQ(a.GetRows(), 0);
+  ASSERT_EQ(a.GetCols(), 0);
 }
 
 TEST(S21Matrix, 1_init_with_wrong_size) {
