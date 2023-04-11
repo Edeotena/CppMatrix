@@ -73,7 +73,6 @@ double S21Matrix::Determinant() const {
 S21Matrix S21Matrix::InverseMatrix() const {
   double d = Determinant();
   if (std::abs(d) < equality_epsilon) {
-    printf("%lf\n", d);
     throw std::out_of_range("Zero determinant (zero division)");
   }
 
