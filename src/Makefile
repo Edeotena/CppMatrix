@@ -1,4 +1,4 @@
-CC = g++ -std=c++17 -Wall -Werror -Wextra -pedantic -g -I .
+CC = g++ -std=c++17 -Wall -Werror -Wextra -Wuninitialized -Wsign-conversion -Wshadow -Weffc++ -pedantic -g -I .
 DELETE = rm -rf
 TEST_FLAGS =  -lgtest
 
@@ -41,20 +41,13 @@ test: $(TEST_TARGET)
 	./$(TEST_TARGET)
 
 clean:
-	$(DELETE) $(TEST_TARGET)
-	$(DELETE) *.o
-	$(DELETE) $(BUILD_PATH)*
-	$(DELETE) $(VALGRIND_OUTPUT)
-	$(DELETE) *.dSYM
-	$(DELETE) $(LIB)
+	$(DELETE) $(TEST_TARGET) *.o $(BUILD_PATH) $(VALGRIND_OUTPUT) $(LIB)
 
 cppcheck:
 	cppcheck --enable=all --suppress=missingIncludeSystem .
 
 style:
-	cp ../materials/linters/.clang-format .
-	clang-format -i $(wildcard */*.cc *.cc */*.h *.h)
-	$(DELETE) .clang-format
+	clang-format --style=Google -i $(wildcard */*.cc *.cc */*.h *.h)
 
 valgrind: $(TEST_TARGET)
 	$(VALGRIND) ./$(TEST_TARGET) || true
