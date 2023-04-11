@@ -2,7 +2,7 @@
 
 #include "s21_matrix_oop.h"
 
-namespace S21Matrix {
+namespace s21_matrix {
 void S21Matrix::PrintMatrix() const {
   std::cout << "Matrix(" << rows_ << ", " << cols_ << "):\n";
   for (int i = 0; i < rows_; i++) {
@@ -22,7 +22,7 @@ void S21Matrix::SetRows(const int rows) {
 
   for (int i = 0; i < cols_; ++i) {
     for (int j = 0; j < std::min(rows, rows_); ++j) {
-      res.matrix_[i * rows + j] = matrix_[i * rows_ + j];
+      res.matrix_[i + j * rows] = matrix_[i + j * rows_];
     }
   }
 
@@ -41,4 +41,4 @@ void S21Matrix::SetCols(const int cols) {
   *this = res;
 }
 
-}  // namespace S21Matrix
+}  // namespace s21_matrix

@@ -3,7 +3,7 @@
 
 #include "s21_matrix_oop.h"
 
-namespace S21Matrix {
+namespace s21_matrix {
 void S21Matrix::AllocateMatrix() {
   if (rows_ < 0 || cols_ < 0) {
     rows_ = cols_ = 0;
@@ -12,7 +12,6 @@ void S21Matrix::AllocateMatrix() {
 
   try {
     matrix_ = new double[rows_ * cols_];
-    std::fill(matrix_, matrix_ + rows_ * cols_, 0);
   } catch (const std::bad_alloc& exc) {
     rows_ = cols_ = 0;
     matrix_ = nullptr;
@@ -35,4 +34,4 @@ S21Matrix S21Matrix::LessMatrix(int row_to_skip, int col_to_skip) const {
 
   return res;
 }
-}  // namespace S21Matrix
+}  // namespace s21_matrix

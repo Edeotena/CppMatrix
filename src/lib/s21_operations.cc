@@ -2,7 +2,7 @@
 
 #include "s21_matrix_oop.h"
 
-namespace S21Matrix {
+namespace s21_matrix {
 bool S21Matrix::EqMatrix(const S21Matrix& other) const {
   return *this == other;
 }
@@ -80,4 +80,4 @@ S21Matrix S21Matrix::InverseMatrix() const {
   S21Matrix result = CalcComplements().Transpose() * (1.0 / d);
   return result;
 }
-}  // namespace S21Matrix
+}  // namespace s21_matrix

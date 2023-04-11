@@ -1,7 +1,7 @@
 #ifndef SRC_S21_MATRIX_OOP_H_
 #define SRC_S21_MATRIX_OOP_H_
 
-namespace S21Matrix {
+namespace s21_matrix {
 
 class S21Matrix {
  public:
@@ -58,6 +58,6 @@ class S21Matrix {
 };
 
 constexpr double equality_epsilon = 1e-07;
-}  // namespace S21Matrix
+}  // namespace s21_matrix
 
 #endif  // SRC_S21_MATRIX_OOP_H_

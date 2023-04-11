@@ -3,7 +3,7 @@
 
 #include "s21_matrix_oop.h"
 
-namespace S21Matrix {
+namespace s21_matrix {
 
 double& S21Matrix::operator()(int i, int j) const {
   if (i >= rows_ || j >= cols_ || i < 0 || j < 0) {
@@ -74,6 +74,7 @@ S21Matrix S21Matrix::operator+(const S21Matrix& other) const {
 
   return res;
 }
+
 S21Matrix S21Matrix::operator-(const S21Matrix& other) const {
   if (rows_ != other.rows_ || cols_ != other.cols_) {
     throw std::out_of_range("Matrix's dimensions must be equal");
@@ -99,6 +100,7 @@ S21Matrix S21Matrix::operator*(const double other) const {
 
   return res;
 }
+
 S21Matrix S21Matrix::operator*(const S21Matrix& other) const {
   if (cols_ != other.rows_) {
     throw std::out_of_range(
@@ -141,4 +143,4 @@ S21Matrix S21Matrix::operator*=(const S21Matrix& other) {
   return *this;
 }
 
-}  // namespace S21Matrix
+}  // namespace s21_matrix

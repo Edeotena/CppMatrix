@@ -2,7 +2,7 @@
 
 #include "s21_matrix_oop.h"
 
-namespace S21Matrix {
+namespace s21_matrix {
 TEST(S21Matrix, 1_init) {
   S21Matrix a;
   ASSERT_EQ(a.GetRows(), 0);
@@ -485,7 +485,7 @@ TEST(S21Matrix, 25_inverse) {
   ASSERT_EQ(res, true);
 }
 
-}  // namespace S21Matrix
+}  // namespace s21_matrix
 
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
