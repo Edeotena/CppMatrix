@@ -1,63 +1,62 @@
-CC = g++
+CC = g++ -std=c++17 -Wall -Werror -Wextra -pedantic -g -I .
 DELETE = rm -rf
+TEST_FLAGS =  -lgtest
+
 FIND_VALGRIND_ERRORS = grep --color=always -n "ERROR SUMMARY" $(VALGRIND_OUTPUT) | grep -v "0 errors from 0 contexts" || true
 FIND_VALGRIND_LEAKS = grep --color=always -n "definitely lost:" $(VALGRIND_OUTPUT) | grep -v "0 bytes in 0 blocks" || true
-VALGRIND = valgrind
-
-FLAGS = -std=c++17 -Wall -Werror -Wextra -pedantic -g
-VALGRIND_FLAGS = --log-file="$(VALGRIND_OUTPUT)" --track-origins=yes --trace-children=yes --leak-check=full --leak-resolution=med
-TEST_FLAGS =  -lgtest
+VALGRIND = valgrind --log-file="$(VALGRIND_OUTPUT)" --track-origins=yes --trace-children=yes --leak-check=full --leak-resolution=med
 
 VALGRIND_OUTPUT = valgrind.txt
 LIB = s21_matrix_oop.a
 
 TEST_TARGET  = s21_tests
-EXECUTABLE = s21_main
 
-SRC_FILES = lib/*.cc -I .
+SRC_LIB = ./lib/
+BUILD_PATH = ./build/
+
+SRC_LIB_FILES = $(wildcard $(SRC_LIB)*.cc)
 TEST_FILES = s21_tests.cc
 
-all: test clean $(LIB)
+SRC_LIB_OBJ = $(patsubst $(SRC_LIB)%.cc, $(BUILD_PATH)%.o, $(SRC_LIB_FILES))
+TEST_OBJ = $(BUILD_PATH)s21_tests.o
 
-build_test: style
-	$(CC) $(FLAGS) $(SRC_FILES) $(TEST_FILES) -o $(TEST_TARGET) $(TEST_FLAGS)
+all: test
 
-$(LIB): style
-	$(CC) $(FLAGS) -c $(SRC_FILES)
-	ar rcv $(LIB) *.o
-	rm *.o
+$(BUILD_PATH):
+	mkdir $(BUILD_PATH)
 
-test: build_test
+$(TEST_TARGET): $(LIB) $(TEST_OBJ)
+	$(CC) $(TEST_OBJ) $(LIB) -o $(TEST_TARGET) $(TEST_FLAGS)
+
+$(BUILD_PATH)%.o: $(SRC_LIB)%.cc
+	$(CC) -c $< -o $@
+
+$(TEST_OBJ) : $(TEST_FILES)
+	$(CC) -c $(TEST_FILES) -o $(TEST_OBJ)
+
+$(LIB): $(BUILD_PATH) style $(SRC_LIB_OBJ)
+	ar rcv $(LIB) $(SRC_LIB_OBJ)
+
+test: $(TEST_TARGET)
 	./$(TEST_TARGET)
-
-build: style
-	$(CC) $(FLAGS) $(SRC_FILES) main.cc -o $(EXECUTABLE)
-
-run: build
-	./$(EXECUTABLE)
 
 clean:
 	$(DELETE) $(TEST_TARGET)
-	$(DELETE) $(EXECUTABLE)
 	$(DELETE) *.o
+	$(DELETE) $(BUILD_PATH)*
 	$(DELETE) $(VALGRIND_OUTPUT)
-	$(DELETE) .clang-format
 	$(DELETE) *.dSYM
+	$(DELETE) $(LIB)
 
 cppcheck:
 	cppcheck --enable=all --suppress=missingIncludeSystem .
 
 style:
 	cp ../materials/linters/.clang-format .
-	clang-format -i $(wildcard */*.cc *.cc */*.h *.h);
+	clang-format -i $(wildcard */*.cc *.cc */*.h *.h)
 	$(DELETE) .clang-format
 
-valgrind: style build
-	$(VALGRIND) $(VALGRIND_FLAGS) ./$(EXECUTABLE) || true
-	$(FIND_VALGRIND_ERRORS)
-	$(FIND_VALGRIND_LEAKS)
-
-valgrind_tests: style build_test
-	$(VALGRIND) $(VALGRIND_FLAGS) ./$(TEST_TARGET) || true
+valgrind: $(TEST_TARGET)
+	$(VALGRIND) ./$(TEST_TARGET) || true
 	$(FIND_VALGRIND_ERRORS)
 	$(FIND_VALGRIND_LEAKS)
