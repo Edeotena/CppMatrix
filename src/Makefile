@@ -20,6 +20,8 @@ TEST_FILES = s21_tests.cc
 SRC_LIB_OBJ = $(patsubst $(SRC_LIB)%.cc, $(BUILD_PATH)%.o, $(SRC_LIB_FILES))
 TEST_OBJ = $(BUILD_PATH)s21_tests.o
 
+.PHONY: all test clean cppcheck style valgrind
+
 all: test
 
 $(BUILD_PATH):
