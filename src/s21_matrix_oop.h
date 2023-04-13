@@ -1,3 +1,5 @@
+// Copyright 2023 guinicyb
+
 #ifndef SRC_S21_MATRIX_OOP_H_
 #define SRC_S21_MATRIX_OOP_H_
 

@@ -1,6 +1,8 @@
+// Copyright 2023 guinicyb
+
 #include <stdexcept>
 
-#include "s21_matrix_oop.h"
+#include "../s21_matrix_oop.h"
 
 namespace s21_matrix {
 bool S21Matrix::EqMatrix(const S21Matrix& other) const {

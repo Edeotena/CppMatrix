@@ -1,7 +1,10 @@
+// Copyright 2023 guinicyb
+
 #include <algorithm>
+#include <cstdint>
 #include <stdexcept>
 
-#include "s21_matrix_oop.h"
+#include "../s21_matrix_oop.h"
 
 namespace s21_matrix {
 
@@ -46,7 +49,7 @@ bool S21Matrix::operator==(const S21Matrix& other) const {
     return false;
   }
 
-  long size = rows_ * cols_;
+  uint16_t size = rows_ * cols_;
   for (int i = 0; i < size; ++i) {
     if (std::abs(matrix_[i] - other.matrix_[i]) > equality_epsilon) {
       return false;
@@ -67,7 +70,7 @@ S21Matrix S21Matrix::operator+(const S21Matrix& other) const {
 
   S21Matrix res(*this);
 
-  long size = cols_ * rows_;
+  uint16_t size = cols_ * rows_;
   for (int i = 0; i < size; ++i) {
     res.matrix_[i] = matrix_[i] + other.matrix_[i];
   }
@@ -82,7 +85,7 @@ S21Matrix S21Matrix::operator-(const S21Matrix& other) const {
 
   S21Matrix res(*this);
 
-  long size = cols_ * rows_;
+  uint16_t size = cols_ * rows_;
   for (int i = 0; i < size; ++i) {
     res.matrix_[i] = matrix_[i] - other.matrix_[i];
   }
@@ -93,7 +96,7 @@ S21Matrix S21Matrix::operator-(const S21Matrix& other) const {
 S21Matrix S21Matrix::operator*(const double other) const {
   S21Matrix res(*this);
 
-  long size = cols_ * rows_;
+  uint16_t size = cols_ * rows_;
   for (int i = 0; i < size; ++i) {
     res.matrix_[i] = matrix_[i] * other;
   }

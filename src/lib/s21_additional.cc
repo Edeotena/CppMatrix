@@ -1,6 +1,8 @@
+// Copyright 2023 guinicyb
+
 #include <iostream>
 
-#include "s21_matrix_oop.h"
+#include "../s21_matrix_oop.h"
 
 namespace s21_matrix {
 void S21Matrix::PrintMatrix() const {

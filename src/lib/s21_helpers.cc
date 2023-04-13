@@ -1,7 +1,9 @@
+// Copyright 2023 guinicyb
+
 #include <new>
 #include <stdexcept>
 
-#include "s21_matrix_oop.h"
+#include "../s21_matrix_oop.h"
 
 namespace s21_matrix {
 void S21Matrix::AllocateMatrix() {

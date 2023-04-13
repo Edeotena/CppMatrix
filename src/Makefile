@@ -1,4 +1,4 @@
-CC = g++ -std=c++17 -Wall -Werror -Wextra -Wuninitialized -Wsign-conversion -Wshadow -Weffc++ -pedantic -g -I .
+CC = g++ -std=c++17 -Wall -Werror -Wextra -Wuninitialized -Wsign-conversion -Wshadow -Weffc++ -pedantic -g
 DELETE = rm -rf
 TEST_FLAGS =  -lgtest
 
@@ -16,11 +16,15 @@ BUILD_PATH = ./build/
 
 SRC_LIB_FILES = $(wildcard $(SRC_LIB)*.cc)
 TEST_FILES = s21_tests.cc
+HEADER = s21_matrix_oop.h
 
 SRC_LIB_OBJ = $(patsubst $(SRC_LIB)%.cc, $(BUILD_PATH)%.o, $(SRC_LIB_FILES))
 TEST_OBJ = $(BUILD_PATH)s21_tests.o
 
-.PHONY: all test clean cppcheck style valgrind
+CPPLINT = cpplint
+CLANG_FORMAT = clang-format
+
+.PHONY: all test clean style $(CLANG_FORMAT) $(CPPLINT) $(VALGRIND)
 
 all: test
 
@@ -36,7 +40,7 @@ $(BUILD_PATH)%.o: $(SRC_LIB)%.cc
 $(TEST_OBJ) : $(TEST_FILES)
 	$(CC) -c $(TEST_FILES) -o $(TEST_OBJ)
 
-$(LIB): $(BUILD_PATH) style $(SRC_LIB_OBJ)
+$(LIB): style $(BUILD_PATH) $(SRC_LIB_OBJ)
 	ar rcv $(LIB) $(SRC_LIB_OBJ)
 
 test: $(TEST_TARGET)
@@ -45,11 +49,13 @@ test: $(TEST_TARGET)
 clean:
 	$(DELETE) $(TEST_TARGET) *.o $(BUILD_PATH) $(VALGRIND_OUTPUT) $(LIB)
 
-cppcheck:
-	cppcheck --enable=all --suppress=missingIncludeSystem .
+style: $(CLANG_FORMAT) $(CPPLINT)
 
-style:
-	clang-format --style=Google -i $(wildcard */*.cc *.cc */*.h *.h)
+$(CPPLINT): $(HEADER) $(SRC_LIB_FILES)
+	$(CPPLINT) $(SRC_LIB_FILES) $(HEADER)
+
+$(CLANG_FORMAT):
+	$(CLANG_FORMAT) --style=Google -i $(wildcard */*.cc *.cc */*.h *.h)
 
 valgrind: $(TEST_TARGET)
 	$(VALGRIND) ./$(TEST_TARGET) || true

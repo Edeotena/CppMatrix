@@ -1,7 +1,9 @@
+// Copyright 2023 guinicyb
+
 #include <algorithm>
 #include <new>
 
-#include "s21_matrix_oop.h"
+#include "../s21_matrix_oop.h"
 
 namespace s21_matrix {
 
